@@ -1,0 +1,60 @@
+.navbar{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #f3f3f3;
+    height: 56px;
+}
+
+.navbar__nav{
+    display: flex;
+    height: 100%;
+    align-items: center;
+    padding: 0 1rem;
+}
+
+.navbar__logo{
+    margin-left: 0.8rem;
+
+}
+
+.navbar__logo a {
+    color: #000000;
+    text-decoration: none;
+    font-size: 1.5rem;
+}
+.spacer {
+    flex: 1;
+}
+
+.navbar_profilePhoto{
+    width: 38px;
+    height: 38px;
+}
+
+.navbar__items ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+     
+}
+
+.navbar__items li {
+    padding:  0 0.5rem;
+
+}
+
+.navbar__items a {
+    color: #777777;
+    text-decoration: none;
+
+    
+}
+.navbar__items a:hover,
+.navbar__items a:active{
+    color: #9d9d9d;
+
+}
