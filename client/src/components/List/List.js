@@ -5,6 +5,9 @@ import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
+import useInfiniteScroll from '../../hooks/useInfiniteScroll/useInfiniteScroll';
+
+
 
 const styles = theme => ({
   root: {
@@ -19,31 +22,47 @@ const styles = theme => ({
   },
 });
 
+var end = 50;
+var start = 0;
 
 
-
-const message = `Truncation should be conditionally applicable on this long line of text
- as this is a much longer line than what the container can support. `;
 
 function AutoGridNoWrap(props) {
   const { classes } = props;
-  for (var key in props.ss) {
-    if (props.ss.hasOwnProperty(key)) {
-      console.log( ": ", props.ss[key]);
-    }
+
+    const [isFetching, setIsFetching] = useInfiniteScroll(fetchMoreListItems);
+
+  function fetchMoreListItems() {
+    setTimeout(() => {
+      start = end + 1 ;
+      end = end + 50 ;
+      console.log("START ", start)
+      console.log("END ", end) 
+      setIsFetching(false);
+    }, 2000);
   }
+
   return (
+    
     <div className={classes.root}>
-      <Paper className={classes.paper}>
-        <Grid container wrap="nowrap" spacing={16}>
-          <Grid item>
-            <Avatar>W</Avatar>
-          </Grid>
-          <Grid item xs>
-            <Typography>{message}</Typography>
-          </Grid>
-        </Grid>
-      </Paper>
+    <ul className="list-group mb-2">
+      {props.users.slice(0,end).map(item => (
+                
+                  <Paper className={classes.paper} key={item.id}>
+                    <Grid container wrap="nowrap" spacing={16}>
+                      <Grid item>
+                        <Avatar>{item.name[0]}</Avatar>
+                      </Grid>
+                      <Grid item xs>
+                        <Typography>{item.name} <br/>{item.mobile_number}</Typography>
+                      </Grid>
+                    </Grid>
+                  </Paper>
+                                
+
+            ))}
+            {isFetching && 'Fetching more list items...'}
+      </ul>
     </div>
   );
 }

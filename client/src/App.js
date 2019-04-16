@@ -4,7 +4,7 @@ import './App.css';
 import Navbar from './components/Navbar/Navbar';
 import SideDrawer from './components/SideDrawer/SideDrawer';
 import Backdrop from './components/Backdrop/Backdrop';
-import Home from './components/page-Home/Home';
+//import Home from './components/page-Home/Home';
 import Dashboard from './components/page-Dashboard/Dashboard';
 import Contacts from './components/page-Contacts/Contacts';
 import Timeline from './components/page-Timeline/Timeline';
@@ -19,20 +19,13 @@ import { useGlobal } from 'reactn';
 const App = props => {
 
   const [state,setState] = useState({
-    SideDrawerOpen: false,
-    isSignedIn: false,
+    SideDrawerOpen: false
   });
   const [ global, setGlobal ] = useGlobal();
-
-  console.log("1",global.isSignedIn)
-
-  
-
 
   const CallB = () => {
     setGlobal({...global,isSignedIn: false});
     setGlobal({...global,userData: null});
-    localStorage.clear();
     firebase.auth().signOut();
     
   }
@@ -72,12 +65,12 @@ const App = props => {
                   <SideDrawer show={state.SideDrawerOpen} closeHandler={backdropCloseHandler}/>  
                   {backdrop}
               </nav>  
-                ) : (<SideDrawer show={global.SideDrawerOpen} closeHandler={backdropCloseHandler}/>)}
+                ) : (<SideDrawer show={global.SideDrawerOpen} closeHandler={backdropCloseHandler}/>,console.log("STATE CHANGED") )}
 
 
               <Switch>
-                  <Route exact path='/' component={Home} />
-                  <Route path='/dashboard' component={Dashboard} />
+                  <Route exact path='/' component={Login} />
+                  <PrivateRoute path='/dashboard' component={Dashboard} />
                   <PrivateRoute path='/contacts' component={Contacts} />
                   <PrivateRoute path='/timeline' component={Timeline} />
                   <Route path='/login' render={(props) => <Login {...props} />} />

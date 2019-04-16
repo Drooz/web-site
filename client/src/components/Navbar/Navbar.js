@@ -10,16 +10,12 @@ import { useGlobal } from 'reactn';
 
 
 const navbar = props => {
-    const [ global, setGlobal ] = useGlobal();
-
-
-
+    const [ global ] = useGlobal();
     return (
         
         
         <header className="navbar">
         <link href="https://use.fontawesome.com/releases/v5.0.7/css/all.css" rel="stylesheet"></link>
-
             <nav className="navbar__nav">
                 <div>
                     <DrawerButtonToggle hover={props.drawerHandler}/>

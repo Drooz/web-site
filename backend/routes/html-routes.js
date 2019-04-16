@@ -12,7 +12,7 @@ module.exports = (app,connection) => {
 
     app.get('/contacts',function(req,res){
         //res.send('Contaxer API');
-        res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3001');
+        res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
         const sql = "SELECT * FROM  user_contact WHERE uuid = 'dr.ooz1996@gmail.com'";
         connection.query(sql,[req.query],function (err,data) {
             (err)? res.send(err):res.json({users:data});
